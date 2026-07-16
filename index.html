@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Seu ManyChat do zero · o prompt da aula</title>
+<title>Sua automação de Instagram do zero · o prompt da aula</title>
 <meta name="description" content="O prompt completo pra construir sua própria plataforma de automação de DM do Instagram, com painel, banco e motor de automação. Copie e cole no Claude Code." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -273,7 +273,7 @@
 <header class="top">
   <div class="wrap">
     <span class="kicker sobe">Aula · automação de direct</span>
-    <h1 class="sobe">O seu ManyChat,<br>construído <em>do zero</em></h1>
+    <h1 class="sobe">A sua automação<br>de Instagram, <em>do zero</em></h1>
     <p class="linha-fina sobe">
       Um prompt só. Cole no Claude Code e ele constrói sua plataforma inteira de automação
       de DM do Instagram: painel com login, banco de dados próprio e o motor que responde
@@ -345,7 +345,7 @@
         </li>
         <li>
           <h3>A DM chega em segundos</h3>
-          <p>Com o botão colado na mensagem, do jeitinho que o ManyChat faz. E a resposta pública aparece no comentário.</p>
+          <p>Com o botão colado na mensagem, do jeitinho que as plataformas de automação fazem. E a resposta pública aparece no comentário.</p>
         </li>
         <li>
           <h3>A pessoa toca no botão</h3>
@@ -424,7 +424,7 @@
 
     <div class="caixa-prompt sobe" id="caixa-prompt" hidden>
       <div class="caixa-topo">
-        <span class="nome">prompt-manychat.md</span>
+        <span class="nome">prompt-automacao-instagram.md</span>
         <span class="tam" id="tamanho"></span>
         <button class="btn-mini secundario" data-baixar>Baixar .md</button>
         <button class="btn-mini" data-copiar>Copiar o prompt</button>
@@ -607,7 +607,7 @@
     const blob = new Blob([TEXTO], { type: 'text/markdown' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'prompt-manychat.md';
+    a.download = 'prompt-automacao-instagram.md';
     a.click();
     URL.revokeObjectURL(a.href);
   });
@@ -626,7 +626,7 @@
     t1: '<b>O login.</b> No seu computador, qualquer e-mail e uma senha de 5 dígitos entram na hora, pra você testar sem configurar nada. No ar, vira login de verdade sozinho.',
     t2: '<b>O painel.</b> Seus números de cara: leads captados, automações ligadas e quantas DMs saíram nos últimos 7 dias.',
     t3: '<b>Suas automações.</b> Cada uma com as palavras que ativam e o interruptor de ligar e desligar. Nenhuma mensalidade envolvida.',
-    t4: '<b>O editor.</b> Você monta a conversa à esquerda e vê a DM chegando à direita, ao vivo. O botão vai colado no balão, igual ao ManyChat.',
+    t4: '<b>O editor.</b> Você monta a conversa à esquerda e vê a DM chegando à direita, ao vivo. O botão vai colado no balão, igual às plataformas de automação.',
   };
   const legenda = document.getElementById('legenda');
   const abas = document.querySelectorAll('.aba');
