@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Crie sua política de privacidade · material da aula</title>
+<meta name="description" content="Prompt pronto pra você colar no Claude e ele criar, no seu próprio site, a página de política de privacidade que a Meta exige pra liberar a API do Instagram." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --creme:#f7f1e7; --creme-2:#fbf7f0; --branco:#fffdf9;
+    --tinta:#26221d; --tinta-soft:#5b5347;
+    --vinho:#8a1f2b; --terra:#c96a3f; --azul:#2f4a6b;
+    --linha:#e5dccc;
+    --code-bg:#211d18; --code-ink:#f3ead9; --code-linha:#40382d; --code-terra:#e79a6f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+    background:var(--creme);color:var(--tinta);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;line-height:1.1;letter-spacing:-.01em}
+  em{font-style:italic;color:var(--vinho)}
+  .wrap{max-width:900px;margin:0 auto;padding:0 22px}
+  .estreito{max-width:760px;margin:0 auto}
+  a{color:var(--vinho)}
+  :focus-visible{outline:2.5px solid var(--azul);outline-offset:3px;border-radius:4px}
+
+  /* ---------------- HERO ---------------- */
+  header.top{
+    background:
+      radial-gradient(120% 90% at 82% -10%,#f6dcc9 0%,transparent 55%),
+      radial-gradient(110% 90% at -8% 120%,#dfe6ef 0%,transparent 50%),
+      var(--creme-2);
+    border-bottom:1px solid var(--linha);
+    padding:60px 0 50px;text-align:center;
+  }
+  .kicker{
+    display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--vinho);background:var(--branco);
+    border:1px solid var(--linha);border-radius:999px;padding:7px 14px;margin-bottom:22px;
+  }
+  header.top h1{font-size:clamp(2rem,5.4vw,3.2rem);font-weight:900;margin-bottom:16px}
+  header.top .linha-fina{
+    color:var(--tinta-soft);max-width:620px;margin:0 auto;font-size:1.06rem;
+  }
+
+  /* ---------------- SECOES ---------------- */
+  section{padding:56px 0;border-bottom:1px solid var(--linha)}
+  .eyebrow{
+    font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.72rem;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--terra);margin-bottom:10px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:24px;height:2px;background:var(--terra)}
+  h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:900;margin-bottom:8px}
+  .sub{color:var(--tinta-soft);max-width:60ch;margin-bottom:28px}
+
+  /* passos */
+  .passos{display:grid;gap:14px;grid-template-columns:1fr}
+  @media(min-width:620px){.passos{grid-template-columns:1fr 1fr}}
+  .passo{
+    background:var(--branco);border:1px solid var(--linha);border-radius:16px;
+    padding:20px 22px;display:flex;gap:16px;align-items:flex-start;
+  }
+  .passo .n{
+    font-family:"JetBrains Mono",monospace;font-weight:700;font-size:.9rem;color:var(--vinho);
+    background:#f3e3d9;min-width:36px;height:36px;border-radius:10px;
+    display:grid;place-items:center;flex:none;
+  }
+  .passo .t{font-weight:700;margin-bottom:3px}
+  .passo .d{color:var(--tinta-soft);font-size:.95rem;line-height:1.5}
+
+  /* checklist */
+  .lista{list-style:none;display:grid;gap:11px;grid-template-columns:1fr}
+  @media(min-width:620px){.lista{grid-template-columns:1fr 1fr}}
+  .lista li{
+    display:flex;gap:13px;align-items:flex-start;
+    background:var(--creme-2);border:1px solid var(--linha);border-radius:13px;padding:14px 16px;
+  }
+  .lista .ck{
+    flex:none;width:23px;height:23px;border-radius:8px;background:var(--terra);color:#fff;
+    display:grid;place-items:center;font-size:.72rem;margin-top:1px;
+  }
+  .lista b{font-weight:700}
+  .lista span{color:var(--tinta-soft);font-size:.9rem}
+
+  /* botao */
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;font:inherit;font-weight:700;font-size:.95rem;
+    padding:13px 22px;border-radius:12px;border:1px solid var(--tinta);
+    background:var(--tinta);color:var(--creme-2);cursor:pointer;text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(38,34,29,.18)}
+  .btn:active{transform:translateY(0)}
+  .btn.ok{background:var(--vinho);border-color:var(--vinho)}
+
+  /* card do prompt */
+  .prompt-card{
+    background:var(--code-bg);border:1px solid var(--code-linha);border-radius:18px;
+    overflow:hidden;box-shadow:0 18px 44px -18px rgba(38,34,29,.4);
+  }
+  .prompt-head{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    padding:14px 16px 14px 20px;border-bottom:1px solid var(--code-linha);
+    position:sticky;top:0;background:var(--code-bg);z-index:2;
+  }
+  .prompt-head .lbl{
+    font-family:"JetBrains Mono",monospace;font-size:.74rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--code-terra);display:flex;align-items:center;gap:9px;
+  }
+  .dots{display:inline-flex;gap:6px}
+  .dots i{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .dots i:nth-child(1){background:#ff6058}.dots i:nth-child(2){background:#ffbe2e}.dots i:nth-child(3){background:#2bc940}
+  .btn-copy{
+    font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;font-size:.9rem;border:0;cursor:pointer;
+    padding:10px 18px;border-radius:10px;background:var(--terra);color:#fff;
+    display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+    transition:transform .12s ease, background .2s ease;
+  }
+  .btn-copy:hover{background:#d9743f}
+  .btn-copy:active{transform:scale(.96)}
+  .btn-copy.ok{background:#2b9d4a}
+  pre#prompt{
+    margin:0;padding:24px 22px 28px;overflow-x:auto;max-height:62vh;
+    color:var(--code-ink);font-family:"JetBrains Mono",ui-monospace,monospace;
+    font-size:.83rem;line-height:1.62;white-space:pre-wrap;word-break:break-word;scrollbar-width:thin;
+  }
+  pre#prompt::-webkit-scrollbar{width:10px;height:10px}
+  pre#prompt::-webkit-scrollbar-thumb{background:var(--code-linha);border-radius:8px}
+
+  .dica{
+    display:flex;gap:14px;align-items:flex-start;margin-top:22px;
+    background:#f3e3d9;border-radius:14px;padding:16px 18px;font-size:.95rem;line-height:1.5;
+  }
+  .dica .ic{flex:none;font-size:1.15rem}
+
+  /* faq */
+  details{
+    border:1px solid var(--linha);border-radius:13px;background:var(--branco);
+    padding:2px 20px;margin-bottom:12px;
+  }
+  details[open]{background:var(--creme-2)}
+  summary{
+    cursor:pointer;font-weight:700;padding:16px 0;list-style:none;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-family:"JetBrains Mono",monospace;color:var(--terra);font-size:1.3rem}
+  details[open] summary::after{content:"\2212"}
+  details p{margin:0 0 16px;color:var(--tinta-soft);font-size:.96rem}
+
+  footer{
+    text-align:center;padding:48px 22px 60px;color:var(--tinta-soft);font-size:.88rem;line-height:1.6;
+  }
+  footer .btn{margin-bottom:22px}
+  footer a{color:var(--tinta-soft)}
+
+  .sobe{opacity:0;transform:translateY(14px)}
+  .sobe.dentro{opacity:1;transform:none;transition:opacity .6s ease, transform .6s ease}
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important}
+    .sobe{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="kicker">Automação de Instagram · material de apoio</span>
+    <h1>Crie a sua <em>política de privacidade</em><br />e libere a API da Meta</h1>
+    <p class="linha-fina">A Meta só publica o seu app (e libera a automação de DM) depois que você informa uma página pública de política de privacidade. Este prompt faz o seu Claude criar essa página dentro do seu próprio site, testar e te devolver o link pronto pra colar lá.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap estreito sobe">
+    <p class="eyebrow">Como usar</p>
+    <h2>Quatro passos e tá no ar</h2>
+    <p class="sub">Você não precisa saber programar. É só conversar com o seu Claude e responder o que ele perguntar.</p>
+    <div class="passos">
+      <div class="passo"><div class="n">01</div><div><div class="t">Copie o prompt</div><div class="d">Toque no botão "Copiar prompt" logo abaixo.</div></div></div>
+      <div class="passo"><div class="n">02</div><div><div class="t">Cole no seu Claude</div><div class="d">De preferência na mesma conversa onde você já mexe no seu site.</div></div></div>
+      <div class="passo"><div class="n">03</div><div><div class="t">Responda as perguntas</div><div class="d">Ele vai te pedir seu nome, seu @, seu e-mail e o seu domínio.</div></div></div>
+      <div class="passo"><div class="n">04</div><div><div class="t">Cole a URL na Meta</div><div class="d">No final ele te entrega o link pronto pro Meta for Developers.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap estreito sobe">
+    <p class="eyebrow">Tenha em mãos</p>
+    <h2>O que o Claude vai te perguntar</h2>
+    <p class="sub">Deixa essas informações separadas antes de começar, pra ir mais rápido.</p>
+    <ul class="lista">
+      <li><span class="ck">&check;</span><div><b>Seu nome</b> <span>completo ou público, que assina a política</span></div></li>
+      <li><span class="ck">&check;</span><div><b>Seu @ do Instagram</b> <span>a conta da automação</span></div></li>
+      <li><span class="ck">&check;</span><div><b>E-mail de contato</b> <span>pra pedidos de privacidade</span></div></li>
+      <li><span class="ck">&check;</span><div><b>Cidade, estado e país</b> <span>base pra LGPD</span></div></li>
+      <li><span class="ck">&check;</span><div><b>Seu domínio</b> <span>o site onde a página vai morar</span></div></li>
+      <li><span class="ck">&check;</span><div><b>Serviços de terceiros</b> <span>usa IA, banco de dados, envio de e-mail?</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap estreito sobe">
+    <p class="eyebrow">O prompt</p>
+    <h2>Copie e cole no seu Claude</h2>
+    <p class="sub">É um prompt avançado: ele investiga o seu site sozinho, cobre tudo que a LGPD e a Meta exigem, publica a página e ainda confere se ficou tudo certo no final.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-head">
+        <span class="lbl"><span class="dots"><i></i><i></i><i></i></span> prompt-politica-privacidade</span>
+        <button class="btn-copy" id="copyBtn" type="button" aria-label="Copiar o prompt">
+          <span id="copyIcon">📋</span><span id="copyLabel">Copiar prompt</span>
+        </button>
+      </div>
+<pre id="prompt">Você é um engenheiro de software sênior e especialista em conformidade com a Plataforma da Meta (API do Instagram) e com a LGPD (Lei 13.709/2018). Você escreve HTML e CSS limpos, acessíveis e responsivos, sabe fazer deploy nos principais serviços, nunca inventa dados, confirma antes de publicar e valida o resultado no final.
+
+OBJETIVO
+Criar e publicar no ar uma página de POLÍTICA DE PRIVACIDADE pública, que eu vou usar pra publicar meu app no Meta for Developers e liberar a API oficial do Instagram na minha automação de DM e comentários (um "ManyChat próprio").
+
+POR QUE ISSO IMPORTA
+- A Meta exige uma URL pública de política de privacidade pra aprovar e publicar o app.
+- Essa URL vai ser visitada por um robô de verificação da Meta. Então ela precisa ser HTTPS, abrir sem login e sem senha, não bloquear robôs e responder com sucesso (200).
+- A página precisa ficar no MESMO domínio ou site que eu já uso, numa rota limpa, tipo /politica-de-privacidade ou /privacidade.
+
+FASE 1: DESCOBERTA (não pule)
+Antes de escrever qualquer código, faça um levantamento. Se você tem acesso à pasta ou ao repositório do meu projeto, INSPECIONE por conta própria pra descobrir:
+- Onde meu site está hospedado e qual o método de deploy (Vercel, Netlify, GitHub Pages, Supabase, Hostinger, etc).
+- Qual o domínio final e como as páginas ou rotas atuais são organizadas, pra você adicionar a nova no mesmo padrão.
+- Quais cores, fontes e estilo o meu site já usa, pra a nova página combinar.
+Depois disso, me faça de uma vez só, numeradas, todas as perguntas que faltarem. Não assuma nada e espere minha resposta.
+
+FASE 2: O QUE PRECISO TE INFORMAR (me pergunte o que faltar)
+1. Meu nome completo ou nome público que assina a política.
+2. Meu @ do Instagram.
+3. Meu e-mail de contato pra assuntos de privacidade.
+4. Minha cidade, estado e país.
+5. Quais dados a automação coleta. O padrão é: meu @ e ID do Instagram, o conteúdo do comentário ou mensagem que a pessoa enviou, e se a pessoa me segue. Me pergunte se eu coleto também e-mail, telefone ou qualquer outro dado.
+6. Se eu uso serviços de terceiros que processam esses dados, como inteligência artificial (OpenAI, ChatGPT), banco de dados (Supabase) ou envio de e-mail (Resend). Eles precisam ser divulgados como operadores.
+7. Se os dados podem ser processados fora do Brasil (a maioria dos servidores fica nos Estados Unidos). Se sim, preciso divulgar a transferência internacional.
+8. Se minha automação é destinada só a maiores de idade.
+
+FASE 3: CONTEÚDO OBRIGATÓRIO DA PÁGINA
+Monte a política em português do Brasil, com linguagem clara, juridicamente sólida e fácil de ler, cobrindo TODAS estas seções:
+1. Título e data da última atualização (use a data de hoje).
+2. Quem somos: meu nome e @, e que a automação funciona por comentários e mensagens diretas no Instagram, via API oficial da Meta.
+3. Dados que coletamos (os que eu confirmei). Deixe explícito que NÃO coletamos senha nem dados de pagamento e que não acessamos conversas de terceiros.
+4. Como e por que usamos os dados, com a base legal da LGPD. Deixe claro que só respondo quem interagiu comigo primeiro e que não mando mensagem pra quem nunca falou comigo.
+5. Compartilhamento e operadores: liste os terceiros que eu confirmei (Meta e, se for o caso, Supabase, OpenAI, Resend), dizendo pra que serve cada um. Afirme que não vendo dados e não uso pra marketing de terceiros.
+6. Transferência internacional dos dados, se aplicável.
+7. Retenção e exclusão: por quanto tempo os dados ficam guardados e como pedir a exclusão.
+8. Segurança: medidas razoáveis de proteção, como conexão criptografada e acesso restrito.
+9. Direitos do titular pela LGPD: acesso, correção, exclusão, portabilidade e revogação do consentimento, pelo e-mail de contato.
+10. Como pedir a exclusão dos dados, numa seção própria com uma âncora dedicada na URL (por exemplo, terminando em #exclusao-de-dados). Me avise que essa âncora serve como "Data Deletion Instructions URL" no painel da Meta.
+11. Dados de menores.
+12. Alterações nesta política.
+13. Contato: meu e-mail como link clicável (mailto).
+14. Rodapé: aviso de que a automação usa a Plataforma da Meta e segue os Termos e as Políticas do Desenvolvedor da Meta.
+
+FASE 4: REQUISITOS TÉCNICOS E DE DESIGN
+- HTML semântico e acessível, com boa hierarquia de títulos, bom contraste e compatível com leitor de tela.
+- Totalmente responsivo: perfeito no celular e no computador, com largura de leitura confortável.
+- Combinar com a identidade visual do meu site (as cores e fontes que você detectou). Se não for possível, faça um visual simples, elegante e profissional.
+- Incluir título da aba, meta description, viewport e o idioma do documento em pt-br.
+- 100% estática e pública, sem login e sem bloquear robôs nessa rota.
+- NÃO usar travessão (o traço longo) em nenhum texto.
+
+FASE 5: PUBLICAÇÃO
+- Adicione a página ao mesmo projeto e domínio, na rota de privacidade, usando o mesmo método de deploy que o projeto já usa.
+- Se o projeto usa Git, faça commit e push. Se usa um serviço de deploy, rode o deploy.
+- Não quebre nada do que já existe no site.
+
+FASE 6: VERIFICAÇÃO FINAL (obrigatória antes de dizer que terminou)
+Confira você mesmo e me relate cada item:
+- A URL final abre no navegador e responde com sucesso.
+- Abre sem login e sem senha.
+- Fica boa no celular.
+- Todas as seções obrigatórias estão presentes.
+- Não tem nenhum travessão no texto.
+- É HTTPS.
+Se algum item falhar, conserte antes de me entregar.
+
+FASE 7: ENTREGA
+No final, me entregue em destaque:
+1. A URL pública completa da política de privacidade, pra colar no campo Privacy Policy URL do Meta for Developers.
+2. A URL da seção de exclusão de dados, pra colar em Data Deletion Instructions URL, se a Meta pedir.
+3. Um resumo do que você fez e como eu atualizo essa política no futuro.
+
+SE EU NÃO TIVER SITE
+Se eu ainda não tenho nenhum domínio ou site próprio, me avise e monte essa única página do jeito mais simples e gratuito de colocar no ar (por exemplo, GitHub Pages), me guiando no passo a passo do zero.
+
+Comece agora pela FASE 1.</pre>
+    </div>
+
+    <div class="dica">
+      <span class="ic">💡</span>
+      <div>Cole esse prompt na mesma conversa onde você costuma editar o seu site. Assim o Claude enxerga os seus arquivos e consegue publicar a página sozinho, no domínio certo.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap estreito sobe">
+    <p class="eyebrow">Dúvidas rápidas</p>
+    <h2>Antes de você perguntar</h2>
+    <div style="margin-top:24px">
+      <details>
+        <summary>Preciso ter um site pra isso funcionar?</summary>
+        <p>O ideal é sim, porque a página fica no seu próprio domínio. Mas se você ainda não tem, o prompt já manda o Claude te oferecer a forma mais simples e gratuita de colocar só essa página no ar (tipo GitHub Pages) e te guiar no passo a passo.</p>
+      </details>
+      <details>
+        <summary>Por que a Meta pede isso?</summary>
+        <p>Pra publicar o app e liberar a API oficial do Instagram, a Meta exige uma URL pública de política de privacidade. Um robô de verificação dela visita o link, então ele precisa abrir sem senha e ser HTTPS. Sem isso, o app não sai do modo de desenvolvimento.</p>
+      </details>
+      <details>
+        <summary>E se eu uso IA (tipo ChatGPT) na minha automação?</summary>
+        <p>Aí você conta isso pro Claude quando ele perguntar. Serviços que processam os dados das conversas (IA, banco de dados, envio de e-mail) precisam aparecer na política como operadores. O prompt já cuida dessa parte.</p>
+      </details>
+      <details>
+        <summary>Depois posso mudar o texto?</summary>
+        <p>Pode. É só voltar na conversa e pedir pro Claude ajustar a seção que você quiser. Ele republica no mesmo link, sem trocar a URL que você já colou na Meta.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <button class="btn" id="copyBtn2" type="button">Copiar o prompt</button>
+  <p>Material de apoio da aula de automação de DM no Instagram.<br />Guarde o link final que o Claude te der: é ele que vai no campo de política de privacidade do Meta for Developers.</p>
+</footer>
+
+<script>
+  (function(){
+    var pre = document.getElementById('prompt');
+    var icon = document.getElementById('copyIcon');
+    var label = document.getElementById('copyLabel');
+    var timer;
+
+    function copiar(btn, isMain){
+      var text = pre.innerText;
+      var done = function(ok){ marcar(btn, isMain, ok); };
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ selecionar(btn, isMain); });
+      } else {
+        selecionar(btn, isMain);
+      }
+    }
+
+    function selecionar(btn, isMain){
+      var range = document.createRange();
+      range.selectNodeContents(pre);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch(e){ ok = false; }
+      marcar(btn, isMain, ok);
+    }
+
+    function marcar(btn, isMain, ok){
+      clearTimeout(timer);
+      if (isMain){
+        btn.classList.toggle('ok', ok);
+        icon.textContent = ok ? '✅' : '📋';
+        label.textContent = ok ? 'Copiado!' : 'Selecione e copie';
+      } else {
+        btn.classList.toggle('ok', ok);
+        btn.textContent = ok ? 'Copiado, agora cole no Claude' : 'Não consegui, selecione o texto';
+      }
+      timer = setTimeout(function(){
+        if (isMain){ btn.classList.remove('ok'); icon.textContent='📋'; label.textContent='Copiar prompt'; }
+        else { btn.classList.remove('ok'); btn.textContent='Copiar o prompt'; }
+      }, 2400);
+    }
+
+    document.getElementById('copyBtn').addEventListener('click', function(){ copiar(this, true); });
+    document.getElementById('copyBtn2').addEventListener('click', function(){ copiar(this, false); });
+
+    // entrada suave
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('dentro'); io.unobserve(e.target); } });
+    }, {threshold:.12});
+    document.querySelectorAll('.sobe').forEach(function(el){ io.observe(el); });
+  })();
+</script>
+</body>
+</html>
