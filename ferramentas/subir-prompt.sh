@@ -19,7 +19,7 @@
 set -e
 cd "$(dirname "$0")/.."
 
-PROJETO="ykypgdzihgxibeplvrjj"   # o Supabase da comunidade
+PROJETO="mfrmnquvwwuxraqgemyh"   # o Supabase do Cadastro de Creators
 CHAVE="manychat"
 
 if [ ! -f prompt.md ]; then
